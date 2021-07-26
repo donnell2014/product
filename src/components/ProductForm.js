@@ -8,7 +8,7 @@ export default props => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/product', {
+        axios.post('http://localhost:8000/api/product/create', {
             title,
             price,
             description
