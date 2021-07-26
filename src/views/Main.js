@@ -6,7 +6,8 @@ import axios from 'axios';
 export default () => {
 
 const [product, setProduct] = useState([]);
-const [loaded, setLoaded] = useState(false)
+const [loaded, setLoaded] = useState(false);
+const [refresh, setRefresh] = useState(true);
 useEffect(() => {
     axios.get('http://localhost:8000/api/product/all')
     .then(res => {
@@ -14,11 +15,9 @@ useEffect(() => {
         setLoaded(true);
     })
     .catch (err => console.log("Error: ", err))
-}, [])
+}, [refresh])
 
-const removeFromDom = productId => {
-    setProduct(product.filter(product => product._id != productId));
-}
+
 
     return (
         <>
@@ -27,7 +26,7 @@ const removeFromDom = productId => {
         <div>
             <h1>All Products</h1>
         </div>
-        {loaded && <ProductList product ={product} removeFromDom={removeFromDom}/>}
+        {loaded && <ProductList product ={product} setRefresh={setRefresh} refresh={refresh}/>}
         </>
     )
 }
